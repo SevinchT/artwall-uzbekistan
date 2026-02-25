@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Gallery from "./pages/Gallery";
 import ArtworkDetail from "./pages/ArtworkDetail";
 import ArtistProfile from "./pages/ArtistProfile";
+import Artists from "./pages/Artists";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/artwork/:id" element={<ArtworkDetail />} />
+          <Route path="/artists" element={<Artists />} />
           <Route path="/artist/:id" element={<ArtistProfile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

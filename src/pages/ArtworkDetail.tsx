@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useFavoritesStore } from "@/stores/favoritesStore";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -33,7 +34,8 @@ const ArtworkDetail = () => {
   const { id } = useParams();
   const artwork = artworks.find((a) => a.id === id) || artworks[0];
   const [currentImage, setCurrentImage] = useState(0);
-  const [isLiked, setIsLiked] = useState(false);
+  const { favoriteIds, toggleFavorite } = useFavoritesStore();
+  const isLiked = favoriteIds.includes(artwork.id);
   const [selectedFrame, setSelectedFrame] = useState("none");
   const [isImageExpanded, setIsImageExpanded] = useState(false);
 
@@ -201,7 +203,7 @@ const ArtworkDetail = () => {
                   <Button
                     variant="outline"
                     size="lg"
-                    onClick={() => setIsLiked(!isLiked)}
+                    onClick={() => toggleFavorite(artwork.id)}
                     className={cn(isLiked && "text-destructive border-destructive")}
                   >
                     <Heart

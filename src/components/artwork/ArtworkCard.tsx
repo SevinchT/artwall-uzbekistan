@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Artwork, formatPrice } from "@/data/mockData";
 import { useState } from "react";
+import { useFavoritesStore } from "@/stores/favoritesStore";
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -11,7 +12,8 @@ interface ArtworkCardProps {
 }
 
 export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
-  const [isLiked, setIsLiked] = useState(false);
+  const { favoriteIds, toggleFavorite } = useFavoritesStore();
+  const isLiked = favoriteIds.includes(artwork.id);
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -51,7 +53,7 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
 
       {/* Like Button */}
       <button
-        onClick={() => setIsLiked(!isLiked)}
+        onClick={() => toggleFavorite(artwork.id)}
         className={cn(
           "absolute top-4 right-4 p-2 rounded-full transition-all duration-300",
           isLiked

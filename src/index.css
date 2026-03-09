@@ -10,7 +10,7 @@
     --background: 36 33% 97%; /* #FAF7F2 warm cream */
     --foreground: 240 4% 12%; /* #1C1C1E deep charcoal */
 
-    --card: 40 33% 96%; /* slightly warmer than bg */
+    --card: 40 33% 96%;
     --card-foreground: 240 4% 12%;
 
     --popover: 36 33% 97%;
@@ -45,6 +45,10 @@
     --ring: 44 52% 54%;
 
     --radius: 0.625rem;
+
+    /* Dark section tokens — always dark regardless of theme */
+    --dark-section-bg: 240 4% 12%;
+    --dark-section-fg: 36 33% 97%;
 
     /* Custom tokens */
     --gradient-gold: linear-gradient(135deg, hsl(44, 52%, 54%) 0%, hsl(40, 60%, 62%) 50%, hsl(44, 52%, 54%) 100%);

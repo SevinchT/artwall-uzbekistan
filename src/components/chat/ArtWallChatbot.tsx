@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, KeyboardEvent, MouseEvent } from "react";
 
 const SYSTEM_PROMPT = `You are Zarina, ArtWall O'zbekiston's AI art advisor — an elegant, knowledgeable assistant for the first AR-powered Uzbek art marketplace.
 
@@ -23,9 +23,14 @@ const suggestedQuestions = [
   "Find art for my living room",
 ];
 
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
 export default function ArtWallChatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
       content:
@@ -35,13 +40,13 @@ export default function ArtWallChatbot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
-  const messagesEndRef = useRef(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const sendMessage = async (text) => {
+  const sendMessage = async (text?: string) => {
     const userMessage = text || input.trim();
     if (!userMessage) return;
 
@@ -49,7 +54,7 @@ export default function ArtWallChatbot() {
     setShowSuggestions(false);
     setIsLoading(true);
 
-    const newMessages = [...messages, { role: "user", content: userMessage }];
+    const newMessages: Message[] = [...messages, { role: "user", content: userMessage }];
     setMessages(newMessages);
 
     try {
@@ -89,11 +94,15 @@ export default function ArtWallChatbot() {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
     }
+  };
+
+  const handleSuggestionHover = (e: MouseEvent<HTMLButtonElement>, isEnter: boolean) => {
+    e.currentTarget.style.background = isEnter ? "#C9A84C15" : "transparent";
   };
 
   return (
@@ -113,7 +122,7 @@ export default function ArtWallChatbot() {
           flexDirection: "column",
           zIndex: 9999,
           boxShadow: "0 24px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.1)",
-          fontFamily: "'Georgia', serif",
+          fontFamily: "'Inter', sans-serif",
           overflow: "hidden",
         }}>
 
@@ -190,7 +199,7 @@ export default function ArtWallChatbot() {
                   color: msg.role === "user" ? "#111" : "#e8d5a3",
                   fontSize: "13.5px",
                   lineHeight: "1.6",
-                  fontFamily: "'Georgia', serif",
+                  fontFamily: "'Inter', sans-serif",
                 }}>
                   {msg.content}
                 </div>
@@ -242,10 +251,10 @@ export default function ArtWallChatbot() {
                       cursor: "pointer",
                       textAlign: "left",
                       transition: "all 0.2s",
-                      fontFamily: "'Georgia', serif",
+                      fontFamily: "'Inter', sans-serif",
                     }}
-                    onMouseEnter={e => e.target.style.background = "#C9A84C15"}
-                    onMouseLeave={e => e.target.style.background = "transparent"}
+                    onMouseEnter={(e) => handleSuggestionHover(e, true)}
+                    onMouseLeave={(e) => handleSuggestionHover(e, false)}
                   >
                     {q}
                   </button>
@@ -279,7 +288,7 @@ export default function ArtWallChatbot() {
                 color: "#e8d5a3",
                 fontSize: "13px",
                 outline: "none",
-                fontFamily: "'Georgia', serif",
+                fontFamily: "'Inter', sans-serif",
               }}
             />
             <button

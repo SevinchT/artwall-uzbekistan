@@ -55,6 +55,34 @@ const TryOnWall = () => {
     setPosition({ x: 50, y: 35 });
   };
 
+  const handleRoomUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast({ title: "Invalid file", description: "Please upload an image file (JPG, PNG, WebP)." });
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Please upload an image under 10 MB." });
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    const newRoom = { id: `custom-${Date.now()}`, label: file.name.split(".")[0].slice(0, 16), image: url };
+    setCustomRooms((prev) => [...prev, newRoom]);
+    setSelectedRoom(newRoom);
+    setPosition({ x: 50, y: 35 });
+    toast({ title: "Room added!", description: "Your photo is ready — select an artwork to preview." });
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleRemoveCustomRoom = (id: string) => {
+    setCustomRooms((prev) => prev.filter((r) => r.id !== id));
+    if (selectedRoom.id === id) {
+      setSelectedRoom(rooms[0]);
+      setPosition({ x: 50, y: 35 });
+    }
+  };
+
   const handleSaveLook = () => {
     toast({
       title: "Look Saved!",

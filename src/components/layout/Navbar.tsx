@@ -85,7 +85,7 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               className={cn(
-                isHome ? "text-card hover:bg-card/10" : "text-foreground"
+                isHome ? "text-white/70 hover:bg-white/10" : "text-foreground/60"
               )}
             >
               <ShoppingBag className="h-5 w-5" />

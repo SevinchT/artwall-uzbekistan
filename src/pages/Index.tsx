@@ -63,7 +63,7 @@ const Index = () => {
           </div>
 
           {/* Main Headline — left-aligned, sans-serif, heavy */}
-          <h1 className="font-heading font-bold text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight max-w-3xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
+          <h1 className="font-body font-extrabold text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight max-w-3xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
             <span className="text-white">Visualize. Connect.</span>
             <br />
             <span className="text-primary">Own Local Art.</span>

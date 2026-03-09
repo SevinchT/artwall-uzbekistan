@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { useToast } from "@/hooks/use-toast";
-import { Eye, Save, ShoppingBag, Move, Scaling, Frame, GripVertical } from "lucide-react";
+import { Eye, Save, ShoppingBag, Move, Scaling, Frame, Upload, X } from "lucide-react";
 import { artworks, formatPrice } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 
@@ -35,11 +35,13 @@ const wallArtworks = artworks.slice(0, 8);
 const TryOnWall = () => {
   const { toast } = useToast();
   const [selectedRoom, setSelectedRoom] = useState(rooms[0]);
+  const [customRooms, setCustomRooms] = useState<{ id: string; label: string; image: string }[]>([]);
   const [selectedArtwork, setSelectedArtwork] = useState<typeof artworks[0] | null>(null);
   const [artworkScale, setArtworkScale] = useState(70);
   const [selectedFrame, setSelectedFrame] = useState(frames[0]);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [fadeKey, setFadeKey] = useState(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Drag state (percentage-based position)
   const [position, setPosition] = useState({ x: 50, y: 35 });
@@ -51,6 +53,34 @@ const TryOnWall = () => {
     setSelectedArtwork(artwork);
     setFadeKey((k) => k + 1);
     setPosition({ x: 50, y: 35 });
+  };
+
+  const handleRoomUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast({ title: "Invalid file", description: "Please upload an image file (JPG, PNG, WebP)." });
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      toast({ title: "File too large", description: "Please upload an image under 10 MB." });
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    const newRoom = { id: `custom-${Date.now()}`, label: file.name.split(".")[0].slice(0, 16), image: url };
+    setCustomRooms((prev) => [...prev, newRoom]);
+    setSelectedRoom(newRoom);
+    setPosition({ x: 50, y: 35 });
+    toast({ title: "Room added!", description: "Your photo is ready — select an artwork to preview." });
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleRemoveCustomRoom = (id: string) => {
+    setCustomRooms((prev) => prev.filter((r) => r.id !== id));
+    if (selectedRoom.id === id) {
+      setSelectedRoom(rooms[0]);
+      setPosition({ x: 50, y: 35 });
+    }
   };
 
   const handleSaveLook = () => {
@@ -236,7 +266,7 @@ const TryOnWall = () => {
               {/* Controls Row */}
               <div className="flex flex-wrap items-center gap-3">
                 {/* Room Switcher */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-wrap">
                   {rooms.map((room) => (
                     <button
                       key={room.id}
@@ -254,6 +284,45 @@ const TryOnWall = () => {
                       {room.label}
                     </button>
                   ))}
+                  {customRooms.map((room) => (
+                    <div key={room.id} className="relative">
+                      <button
+                        onClick={() => {
+                          setSelectedRoom(room);
+                          setPosition({ x: 50, y: 35 });
+                        }}
+                        className={cn(
+                          "px-4 py-2 rounded-lg text-xs font-medium transition-all border pr-7",
+                          selectedRoom.id === room.id
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "bg-card/5 text-card/60 border-card/10 hover:border-card/30 hover:text-card"
+                        )}
+                      >
+                        {room.label}
+                      </button>
+                      <button
+                        onClick={() => handleRemoveCustomRoom(room.id)}
+                        className="absolute right-1 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-card/20 text-card/50 hover:text-card transition-colors"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                  {/* Upload button */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleRoomUpload}
+                  />
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-4 py-2 rounded-lg text-xs font-medium transition-all border border-dashed border-card/20 bg-card/5 text-card/50 hover:border-primary/50 hover:text-primary flex items-center gap-1.5"
+                  >
+                    <Upload className="h-3.5 w-3.5" />
+                    Your Room
+                  </button>
                 </div>
 
                 <div className="flex-1" />

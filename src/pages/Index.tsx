@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Palette, Eye, ShoppingBag, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Palette, Eye, ShoppingBag, Star, ChevronLeft, ChevronRight, Camera, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ArtworkCard } from "@/components/artwork/ArtworkCard";

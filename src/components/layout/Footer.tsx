@@ -79,7 +79,7 @@ export function Footer() {
             <ul className="space-y-3">
               {[t("nav.joinArtist")].map((item) => (
                 <li key={item}>
-                  <Link to="/join-artist" className="text-background/50 hover:text-primary transition-colors text-sm font-body">
+                  <Link to="/join-artist" className="text-dark-section-foreground/50 hover:text-primary transition-colors text-sm font-body">
                     {item}
                   </Link>
                 </li>

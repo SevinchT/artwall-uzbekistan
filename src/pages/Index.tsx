@@ -64,9 +64,9 @@ const Index = () => {
 
           {/* Main Headline — left-aligned, sans-serif, heavy */}
           <h1 className="font-body font-extrabold text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight max-w-3xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            <span className="text-white">Visualize. Connect.</span>
+            <span className="text-white">Discover Uzbek Art.</span>
             <br />
-            <span className="text-primary">Own Local Art.</span>
+            <span className="text-primary">See It On Your Wall.</span>
           </h1>
 
           {/* Subheadline */}

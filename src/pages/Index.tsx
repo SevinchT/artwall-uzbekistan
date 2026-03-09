@@ -222,7 +222,7 @@ const Index = () => {
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
-              <blockquote className="text-white/90 text-xl md:text-2xl font-heading italic leading-relaxed mb-10">
+              <blockquote className="text-dark-section-foreground/90 text-xl md:text-2xl font-heading italic leading-relaxed mb-10">
                 "{testimonials[currentTestimonial].quote}"
               </blockquote>
               <div className="flex items-center justify-center gap-4">

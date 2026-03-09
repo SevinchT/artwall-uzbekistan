@@ -8,7 +8,7 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-dark-section text-dark-section-foreground">
       {/* Newsletter Section */}
       <div className="border-b border-background/10">
         <div className="container mx-auto px-4 lg:px-8 py-16">

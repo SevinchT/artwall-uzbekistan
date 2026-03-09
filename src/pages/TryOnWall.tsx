@@ -35,11 +35,13 @@ const wallArtworks = artworks.slice(0, 8);
 const TryOnWall = () => {
   const { toast } = useToast();
   const [selectedRoom, setSelectedRoom] = useState(rooms[0]);
+  const [customRooms, setCustomRooms] = useState<{ id: string; label: string; image: string }[]>([]);
   const [selectedArtwork, setSelectedArtwork] = useState<typeof artworks[0] | null>(null);
   const [artworkScale, setArtworkScale] = useState(70);
   const [selectedFrame, setSelectedFrame] = useState(frames[0]);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [fadeKey, setFadeKey] = useState(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Drag state (percentage-based position)
   const [position, setPosition] = useState({ x: 50, y: 35 });

@@ -103,15 +103,15 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-background/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-background/40 text-sm font-body">
+        <div className="border-t border-dark-section-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-dark-section-foreground/40 text-sm font-body">
             {t("footer.copyright")}
           </p>
           <div className="flex gap-6 text-sm font-body">
-            <Link to="#" className="text-background/40 hover:text-background transition-colors">
+            <Link to="#" className="text-dark-section-foreground/40 hover:text-dark-section-foreground transition-colors">
               {t("footer.privacy")}
             </Link>
-            <Link to="#" className="text-background/40 hover:text-background transition-colors">
+            <Link to="#" className="text-dark-section-foreground/40 hover:text-dark-section-foreground transition-colors">
               {t("footer.terms")}
             </Link>
           </div>

@@ -212,7 +212,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 lg:py-36 bg-foreground">
+      <section className="py-24 lg:py-36 bg-dark-section">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-6">{t("testimonials.overline")}</p>

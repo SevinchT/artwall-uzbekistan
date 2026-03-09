@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,8 +6,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
 import { useToast } from "@/hooks/use-toast";
-import { Eye, Save, ShoppingBag, Maximize, Minimize, Square } from "lucide-react";
+import { Eye, Save, ShoppingBag, Move, Scaling, Frame, GripVertical } from "lucide-react";
 import { artworks, formatPrice } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 
@@ -16,32 +17,18 @@ import roomScandinavian from "@/assets/room-scandinavian.jpg";
 import roomStudy from "@/assets/room-study.jpg";
 
 const rooms = [
-  {
-    id: "modern",
-    label: "Modern Living",
-    image: roomModern,
-    // artwork placement zone (percentage-based)
-    artworkZone: { top: "12%", left: "30%", maxWidth: "40%", maxHeight: "45%" },
-  },
-  {
-    id: "scandinavian",
-    label: "Scandinavian Bedroom",
-    image: roomScandinavian,
-    artworkZone: { top: "8%", left: "25%", maxWidth: "50%", maxHeight: "45%" },
-  },
-  {
-    id: "study",
-    label: "Elegant Study",
-    image: roomStudy,
-    artworkZone: { top: "8%", left: "22%", maxWidth: "56%", maxHeight: "48%" },
-  },
+  { id: "modern", label: "Modern Living", image: roomModern },
+  { id: "scandinavian", label: "Scandinavian Bedroom", image: roomScandinavian },
+  { id: "study", label: "Elegant Study", image: roomStudy },
 ];
 
-const sizeFactors = {
-  small: 0.55,
-  medium: 0.8,
-  large: 1,
-} as const;
+const frames = [
+  { id: "none", label: "No Frame", border: "none", shadow: "0 4px 20px rgba(0,0,0,0.3)" },
+  { id: "thin-black", label: "Thin Black", border: "3px solid hsl(0,0%,10%)", shadow: "0 6px 30px rgba(0,0,0,0.4)" },
+  { id: "thin-white", label: "Thin White", border: "4px solid hsl(0,0%,95%)", shadow: "0 6px 30px rgba(0,0,0,0.35)" },
+  { id: "classic-wood", label: "Classic Wood", border: "8px solid hsl(25,40%,35%)", shadow: "0 8px 35px rgba(0,0,0,0.45), inset 0 0 0 2px hsl(25,30%,25%)" },
+  { id: "ornate-gold", label: "Ornate Gold", border: "10px solid hsl(36,49%,62%)", shadow: "0 8px 40px rgba(0,0,0,0.45), inset 0 0 0 3px hsl(40,55%,50%)" },
+];
 
 const wallArtworks = artworks.slice(0, 8);
 
@@ -49,13 +36,21 @@ const TryOnWall = () => {
   const { toast } = useToast();
   const [selectedRoom, setSelectedRoom] = useState(rooms[0]);
   const [selectedArtwork, setSelectedArtwork] = useState<typeof artworks[0] | null>(null);
-  const [artworkSize, setArtworkSize] = useState<"small" | "medium" | "large">("medium");
+  const [artworkScale, setArtworkScale] = useState(70);
+  const [selectedFrame, setSelectedFrame] = useState(frames[0]);
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [fadeKey, setFadeKey] = useState(0);
+
+  // Drag state (percentage-based position)
+  const [position, setPosition] = useState({ x: 50, y: 35 });
+  const [isDragging, setIsDragging] = useState(false);
+  const roomRef = useRef<HTMLDivElement>(null);
+  const dragStart = useRef({ x: 0, y: 0, posX: 0, posY: 0 });
 
   const handleSelectArtwork = (artwork: typeof artworks[0]) => {
     setSelectedArtwork(artwork);
     setFadeKey((k) => k + 1);
+    setPosition({ x: 50, y: 35 });
   };
 
   const handleSaveLook = () => {
@@ -67,8 +62,30 @@ const TryOnWall = () => {
     });
   };
 
-  const zone = selectedRoom.artworkZone;
-  const scale = sizeFactors[artworkSize];
+  // Drag handlers
+  const onPointerDown = useCallback((e: React.PointerEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+    dragStart.current = { x: e.clientX, y: e.clientY, posX: position.x, posY: position.y };
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+  }, [position]);
+
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    if (!isDragging || !roomRef.current) return;
+    const rect = roomRef.current.getBoundingClientRect();
+    const dx = ((e.clientX - dragStart.current.x) / rect.width) * 100;
+    const dy = ((e.clientY - dragStart.current.y) / rect.height) * 100;
+    setPosition({
+      x: Math.max(5, Math.min(95, dragStart.current.posX + dx)),
+      y: Math.max(5, Math.min(85, dragStart.current.posY + dy)),
+    });
+  }, [isDragging]);
+
+  const onPointerUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  const scaleFactor = artworkScale / 100;
 
   return (
     <div className="min-h-screen bg-foreground">
@@ -91,36 +108,52 @@ const TryOnWall = () => {
             {/* Left: Room Panel (3/5) */}
             <div className="lg:col-span-3 flex flex-col gap-4">
               {/* Room Preview */}
-              <div className="relative rounded-2xl overflow-hidden bg-foreground border border-card/10 aspect-square lg:aspect-auto lg:flex-1">
+              <div
+                ref={roomRef}
+                className="relative rounded-2xl overflow-hidden bg-foreground border border-card/10 aspect-square lg:aspect-auto lg:flex-1 select-none"
+              >
                 <img
                   src={selectedRoom.image}
                   alt={selectedRoom.label}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover pointer-events-none"
                 />
 
                 {/* Artwork on Wall */}
                 {selectedArtwork && (
                   <div
                     key={fadeKey}
-                    className="absolute flex items-center justify-center animate-fade-in"
+                    className="absolute animate-fade-in"
                     style={{
-                      top: zone.top,
-                      left: zone.left,
-                      maxWidth: zone.maxWidth,
-                      maxHeight: zone.maxHeight,
+                      left: `${position.x}%`,
+                      top: `${position.y}%`,
+                      transform: `translate(-50%, -50%) scale(${scaleFactor})`,
+                      cursor: isDragging ? "grabbing" : "grab",
+                      transition: isDragging ? "none" : "transform 0.4s ease-out",
+                      zIndex: 10,
                     }}
+                    onPointerDown={onPointerDown}
+                    onPointerMove={onPointerMove}
+                    onPointerUp={onPointerUp}
                   >
                     <div
-                      style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
-                      className="transition-transform duration-500 ease-out"
+                      className="transition-all duration-300 ease-out"
+                      style={{
+                        border: selectedFrame.border,
+                        boxShadow: selectedFrame.shadow,
+                        borderRadius: selectedFrame.id === "ornate-gold" ? "2px" : "1px",
+                      }}
                     >
-                      <div className="shadow-[0_8px_40px_rgba(0,0,0,0.45)] border-[6px] border-card/90 rounded-sm">
-                        <img
-                          src={selectedArtwork.images[0]}
-                          alt={selectedArtwork.title}
-                          className="block max-w-full max-h-[260px] lg:max-h-[340px] object-contain"
-                        />
-                      </div>
+                      <img
+                        src={selectedArtwork.images[0]}
+                        alt={selectedArtwork.title}
+                        className="block max-w-[280px] lg:max-w-[360px] max-h-[220px] lg:max-h-[300px] object-contain"
+                        draggable={false}
+                      />
+                    </div>
+                    {/* Floating drag hint */}
+                    <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1 bg-foreground/80 backdrop-blur-sm rounded-full px-3 py-1 opacity-60 pointer-events-none">
+                      <Move className="h-3 w-3 text-card/70" />
+                      <span className="text-[10px] text-card/70">Drag to move</span>
                     </div>
                   </div>
                 )}
@@ -138,14 +171,79 @@ const TryOnWall = () => {
                 )}
               </div>
 
-              {/* Controls */}
+              {/* Size Slider */}
+              {selectedArtwork && (
+                <div className="flex items-center gap-4 px-2">
+                  <div className="flex items-center gap-2 text-card/60">
+                    <Scaling className="h-4 w-4" />
+                    <span className="text-xs font-medium w-7">Size</span>
+                  </div>
+                  <Slider
+                    value={[artworkScale]}
+                    onValueChange={(v) => setArtworkScale(v[0])}
+                    min={30}
+                    max={120}
+                    step={1}
+                    className="flex-1"
+                  />
+                  <span className="text-xs text-card/40 w-10 text-right">{artworkScale}%</span>
+                </div>
+              )}
+
+              {/* Frame Selector */}
+              {selectedArtwork && (
+                <div className="flex items-center gap-3 px-2">
+                  <div className="flex items-center gap-2 text-card/60">
+                    <Frame className="h-4 w-4" />
+                    <span className="text-xs font-medium">Frame</span>
+                  </div>
+                  <div className="flex gap-2">
+                    {frames.map((frame) => (
+                      <button
+                        key={frame.id}
+                        onClick={() => setSelectedFrame(frame)}
+                        className={cn(
+                          "relative w-10 h-10 rounded-lg border-2 transition-all duration-200 flex items-center justify-center",
+                          selectedFrame.id === frame.id
+                            ? "border-primary ring-1 ring-primary scale-110"
+                            : "border-card/15 hover:border-card/40"
+                        )}
+                        title={frame.label}
+                      >
+                        {/* Frame preview swatch */}
+                        {frame.id === "none" && (
+                          <div className="w-5 h-5 rounded-sm bg-card/10 border border-dashed border-card/30" />
+                        )}
+                        {frame.id === "thin-black" && (
+                          <div className="w-5 h-5 rounded-sm border-2" style={{ borderColor: "hsl(0,0%,10%)" }} />
+                        )}
+                        {frame.id === "thin-white" && (
+                          <div className="w-5 h-5 rounded-sm border-2" style={{ borderColor: "hsl(0,0%,95%)" }} />
+                        )}
+                        {frame.id === "classic-wood" && (
+                          <div className="w-5 h-5 rounded-sm border-[3px]" style={{ borderColor: "hsl(25,40%,35%)" }} />
+                        )}
+                        {frame.id === "ornate-gold" && (
+                          <div className="w-5 h-5 rounded-sm border-[3px]" style={{ borderColor: "hsl(36,49%,62%)" }} />
+                        )}
+                        <span className="sr-only">{frame.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Controls Row */}
               <div className="flex flex-wrap items-center gap-3">
                 {/* Room Switcher */}
                 <div className="flex gap-2">
                   {rooms.map((room) => (
                     <button
                       key={room.id}
-                      onClick={() => setSelectedRoom(room)}
+                      onClick={() => {
+                        setSelectedRoom(room);
+                        setPosition({ x: 50, y: 35 });
+                      }}
                       className={cn(
                         "px-4 py-2 rounded-lg text-xs font-medium transition-all border",
                         selectedRoom.id === room.id
@@ -154,30 +252,6 @@ const TryOnWall = () => {
                       )}
                     >
                       {room.label}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="h-6 w-px bg-card/10 hidden sm:block" />
-
-                {/* Size Controls */}
-                <div className="flex gap-1">
-                  {([
-                    { key: "small", icon: Minimize, label: "S" },
-                    { key: "medium", icon: Square, label: "M" },
-                    { key: "large", icon: Maximize, label: "L" },
-                  ] as const).map(({ key, icon: Icon }) => (
-                    <button
-                      key={key}
-                      onClick={() => setArtworkSize(key)}
-                      className={cn(
-                        "p-2 rounded-lg transition-all border",
-                        artworkSize === key
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "bg-card/5 text-card/60 border-card/10 hover:border-card/30"
-                      )}
-                    >
-                      <Icon className="h-4 w-4" />
                     </button>
                   ))}
                 </div>

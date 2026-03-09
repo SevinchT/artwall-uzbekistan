@@ -65,7 +65,7 @@ export function Footer() {
                 { label: t("nav.tryOnWall"), href: "/try-on-wall" },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link to={item.href} className="text-background/50 hover:text-primary transition-colors text-sm font-body">
+                  <Link to={item.href} className="text-dark-section-foreground/50 hover:text-primary transition-colors text-sm font-body">
                     {item.label}
                   </Link>
                 </li>

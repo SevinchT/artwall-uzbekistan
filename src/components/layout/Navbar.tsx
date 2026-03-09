@@ -66,7 +66,7 @@ export function Navbar() {
               size="icon"
               className={cn(
                 "hidden sm:flex",
-                isHome ? "text-card hover:bg-card/10" : "text-foreground"
+                isHome ? "text-white/70 hover:bg-white/10" : "text-foreground/60"
               )}
             >
               <Search className="h-5 w-5" />

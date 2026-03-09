@@ -54,7 +54,7 @@ export function Navbar() {
               isHome ? "text-white" : "text-foreground"
             )}
           >
-            Art<span className="text-primary">Wall</span>
+            Art<span className="text-primary">Wall</span> <span className="hidden sm:inline text-xs font-body font-normal tracking-[0.15em] opacity-60 ml-1">O'zbekiston</span>
           </Link>
 
           {/* Desktop Navigation */}

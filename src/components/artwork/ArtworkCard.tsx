@@ -67,19 +67,19 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
       {/* Info */}
       <div className="p-5">
         <Link to={`/artwork/${artwork.id}`}>
-          <h3 className="font-heading font-semibold text-foreground truncate hover:text-primary transition-colors">
+          <h3 className="font-heading font-semibold text-foreground truncate hover:text-primary transition-colors duration-300">
             {artwork.title}
           </h3>
         </Link>
         <Link
           to={`/artist/${artwork.artist.id}`}
-          className="text-sm text-muted-foreground hover:text-primary transition-colors mt-1 block"
+          className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 mt-1 block tracking-wide"
         >
           {artwork.artist.name}
         </Link>
-        <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-border/50">
           <p className="font-heading font-bold text-primary text-lg">
-            {formatPrice(artwork.price)} <span className="text-xs font-normal text-muted-foreground">UZS</span>
+            {formatPrice(artwork.price)} <span className="text-[10px] font-body font-normal text-muted-foreground tracking-wider uppercase">UZS</span>
           </p>
           <div className="flex items-center gap-1 text-muted-foreground text-xs">
             <Heart className="h-3 w-3" />

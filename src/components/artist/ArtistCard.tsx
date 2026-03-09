@@ -23,8 +23,8 @@ export function ArtistCard({ artist, className }: ArtistCardProps) {
     <Link
       to={`/artist/${artist.id}`}
       className={cn(
-        "group block bg-card rounded-xl overflow-hidden shadow-soft transition-all duration-300",
-        "hover:shadow-card hover:-translate-y-1",
+        "group block bg-card rounded-xl overflow-hidden shadow-soft transition-all duration-500 ease-out",
+        "hover:shadow-elevated hover:-translate-y-1.5",
         className
       )}
     >

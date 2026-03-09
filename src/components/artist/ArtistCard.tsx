@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import { BadgeCheck, MapPin, Palette } from "lucide-react";
+import { BadgeCheck, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Artist } from "@/data/mockData";
+import { useTranslation } from "@/stores/i18nStore";
 
 interface ArtistCardProps {
   artist: Artist;
   className?: string;
 }
 
-// Deterministic cover gradient per artist
 const coverGradients = [
   "from-primary/30 to-accent/10",
   "from-primary/20 to-primary/5",
@@ -18,6 +18,7 @@ const coverGradients = [
 
 export function ArtistCard({ artist, className }: ArtistCardProps) {
   const gradientIndex = parseInt(artist.id, 10) % coverGradients.length;
+  const { t } = useTranslation();
 
   return (
     <Link
@@ -28,15 +29,8 @@ export function ArtistCard({ artist, className }: ArtistCardProps) {
         className
       )}
     >
-      {/* Cover band */}
-      <div
-        className={cn(
-          "h-24 bg-gradient-to-br",
-          coverGradients[gradientIndex]
-        )}
-      />
+      <div className={cn("h-24 bg-gradient-to-br", coverGradients[gradientIndex])} />
 
-      {/* Avatar – overlaps cover by half */}
       <div className="relative flex justify-center -mt-10">
         <div className="relative">
           <img
@@ -52,7 +46,6 @@ export function ArtistCard({ artist, className }: ArtistCardProps) {
         </div>
       </div>
 
-      {/* Info */}
       <div className="text-center px-5 pt-3 pb-5">
         <h3 className="font-heading font-semibold text-base text-foreground leading-tight group-hover:text-primary transition-colors">
           {artist.name}
@@ -69,11 +62,11 @@ export function ArtistCard({ artist, className }: ArtistCardProps) {
 
         <div className="flex items-center justify-center gap-4 mt-4 text-xs text-muted-foreground">
           <span>
-            <strong className="text-foreground">{artist.artworksCount}</strong> works
+            <strong className="text-foreground">{artist.artworksCount}</strong> {t("artistCard.works")}
           </span>
           <span className="w-px h-3 bg-border" />
           <span>
-            <strong className="text-foreground">{artist.followersCount}</strong> followers
+            <strong className="text-foreground">{artist.followersCount}</strong> {t("artistCard.followers")}
           </span>
         </div>
       </div>

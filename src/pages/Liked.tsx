@@ -6,10 +6,12 @@ import { artworks } from "@/data/mockData";
 import { Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useTranslation } from "@/stores/i18nStore";
 
 const Liked = () => {
   const { favoriteIds } = useFavoritesStore();
   const likedArtworks = artworks.filter((a) => favoriteIds.includes(a.id));
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-background">
@@ -19,10 +21,10 @@ const Liked = () => {
           <div className="mb-10">
             <h1 className="font-heading text-3xl md:text-4xl font-bold text-foreground flex items-center gap-3">
               <Heart className="h-8 w-8 text-destructive fill-current" />
-              Liked Artworks
+              {t("liked.title")}
             </h1>
             <p className="text-muted-foreground mt-2">
-              {likedArtworks.length} artwork{likedArtworks.length !== 1 ? "s" : ""} saved
+              {t("liked.count", { count: likedArtworks.length })}
             </p>
           </div>
 
@@ -36,13 +38,13 @@ const Liked = () => {
             <div className="text-center py-20">
               <Heart className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
               <h2 className="font-heading text-xl font-semibold text-foreground mb-2">
-                No liked artworks yet
+                {t("liked.empty")}
               </h2>
               <p className="text-muted-foreground mb-6">
-                Explore the gallery and tap the heart icon to save your favorites.
+                {t("liked.emptyDesc")}
               </p>
               <Button variant="gold" asChild>
-                <Link to="/gallery">Browse Gallery</Link>
+                <Link to="/gallery">{t("liked.browse")}</Link>
               </Button>
             </div>
           )}

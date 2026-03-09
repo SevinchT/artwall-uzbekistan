@@ -56,33 +56,25 @@ const Index = () => {
         </div>
 
         <div className="relative container mx-auto px-4 lg:px-8 pb-32 pt-40">
-          {/* AI Badge */}
           <div className="inline-flex items-center gap-2 bg-foreground/60 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 mb-10 animate-slide-up" style={{ animationDelay: "0s" }}>
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span className="text-white/80 text-xs font-body font-medium tracking-wide">AI-Powered Art Visualization</span>
+            <span className="text-white/80 text-xs font-body font-medium tracking-wide">{t("hero.badge")}</span>
           </div>
 
-          {/* Main Headline — left-aligned, sans-serif, heavy */}
           <h1 className="font-body font-extrabold text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight max-w-3xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            <span className="text-white">Discover Uzbek Art.</span>
+            <span className="text-white">{t("hero.title1")}</span>
             <br />
-            <span className="text-primary">See It On Your Wall.</span>
+            <span className="text-primary">{t("hero.title2")}</span>
           </h1>
 
-          {/* Subheadline */}
-          <p className="text-white/55 font-body text-base md:text-lg mt-8 max-w-md leading-relaxed animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            The first AI & AR-powered marketplace
-            <br className="hidden sm:block" />
-            connecting Uzbek artists with
-            <br className="hidden sm:block" />
-            global art lovers.
+          <p className="text-white/55 font-body text-base md:text-lg mt-8 max-w-md leading-relaxed animate-slide-up whitespace-pre-line" style={{ animationDelay: "0.2s" }}>
+            {t("hero.subtitle")}
           </p>
 
-          {/* Two CTA Buttons */}
           <div className="flex flex-wrap items-center gap-4 mt-12 animate-slide-up" style={{ animationDelay: "0.3s" }}>
             <Button variant="gold" size="xl" asChild className="text-base">
               <Link to="/gallery">
-                Explore Gallery
+                {t("hero.cta.gallery")}
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Link>
             </Button>
@@ -94,13 +86,12 @@ const Index = () => {
             >
               <Link to="/try-on-wall">
                 <Camera className="h-4.5 w-4.5 mr-2" />
-                Try on Your Wall
+                {t("hero.cta.wall")}
               </Link>
             </Button>
           </div>
         </div>
 
-        {/* Stats Bar */}
         <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-foreground/30 backdrop-blur-sm">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid grid-cols-3 divide-x divide-white/10">

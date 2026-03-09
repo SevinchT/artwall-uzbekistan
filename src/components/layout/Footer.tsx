@@ -16,7 +16,7 @@ export function Footer() {
             <h3 className="font-heading text-2xl md:text-3xl font-bold mb-4">
               {t("footer.newsletter.title")}
             </h3>
-            <p className="text-background/60 mb-8 font-body">
+            <p className="text-dark-section-foreground/60 mb-8 font-body">
               {t("footer.newsletter.desc")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">

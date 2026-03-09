@@ -266,7 +266,7 @@ const TryOnWall = () => {
               {/* Controls Row */}
               <div className="flex flex-wrap items-center gap-3">
                 {/* Room Switcher */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 flex-wrap">
                   {rooms.map((room) => (
                     <button
                       key={room.id}
@@ -284,6 +284,45 @@ const TryOnWall = () => {
                       {room.label}
                     </button>
                   ))}
+                  {customRooms.map((room) => (
+                    <div key={room.id} className="relative">
+                      <button
+                        onClick={() => {
+                          setSelectedRoom(room);
+                          setPosition({ x: 50, y: 35 });
+                        }}
+                        className={cn(
+                          "px-4 py-2 rounded-lg text-xs font-medium transition-all border pr-7",
+                          selectedRoom.id === room.id
+                            ? "bg-primary text-primary-foreground border-primary"
+                            : "bg-card/5 text-card/60 border-card/10 hover:border-card/30 hover:text-card"
+                        )}
+                      >
+                        {room.label}
+                      </button>
+                      <button
+                        onClick={() => handleRemoveCustomRoom(room.id)}
+                        className="absolute right-1 top-1/2 -translate-y-1/2 p-0.5 rounded-full hover:bg-card/20 text-card/50 hover:text-card transition-colors"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                  {/* Upload button */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleRoomUpload}
+                  />
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="px-4 py-2 rounded-lg text-xs font-medium transition-all border border-dashed border-card/20 bg-card/5 text-card/50 hover:border-primary/50 hover:text-primary flex items-center gap-1.5"
+                  >
+                    <Upload className="h-3.5 w-3.5" />
+                    Your Room
+                  </button>
                 </div>
 
                 <div className="flex-1" />

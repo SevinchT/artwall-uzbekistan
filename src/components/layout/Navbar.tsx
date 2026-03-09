@@ -33,7 +33,7 @@ export function Navbar() {
             to="/"
             className={cn(
               "font-heading text-2xl font-bold tracking-tight transition-colors",
-              isHome ? "text-card" : "text-foreground"
+              isHome ? "text-white" : "text-foreground"
             )}
           >
             Art<span className="text-primary">Wall</span>

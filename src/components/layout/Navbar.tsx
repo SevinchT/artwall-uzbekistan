@@ -9,7 +9,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/gallery", label: "Gallery" },
   { href: "/artists", label: "Artists" },
-  { href: "/about", label: "About" },
+  { href: "/try-on-wall", label: "Try on Wall" },
 ];
 
 export function Navbar() {

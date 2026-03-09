@@ -23,7 +23,7 @@ export function Footer() {
               <Input
                 type="email"
                 placeholder={t("footer.newsletter.placeholder")}
-                className="bg-background/10 border-background/20 text-background placeholder:text-background/40 focus:border-primary"
+                className="bg-dark-section-foreground/10 border-dark-section-foreground/20 text-dark-section-foreground placeholder:text-dark-section-foreground/40 focus:border-primary"
               />
               <Button variant="gold" className="shrink-0">
                 <Send className="h-4 w-4 mr-2" />

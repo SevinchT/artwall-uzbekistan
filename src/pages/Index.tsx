@@ -238,7 +238,7 @@ const Index = () => {
                 </button>
                 <div className="flex gap-2">
                   {testimonials.map((_, index) => (
-                    <button key={index} onClick={() => setCurrentTestimonial(index)} className={`h-1.5 rounded-full transition-all duration-500 ${index === currentTestimonial ? "bg-primary w-8" : "bg-white/20 w-1.5"}`} />
+                    <button key={index} onClick={() => setCurrentTestimonial(index)} className={`h-1.5 rounded-full transition-all duration-500 ${index === currentTestimonial ? "bg-primary w-8" : "bg-dark-section-foreground/20 w-1.5"}`} />
                   ))}
                 </div>
                 <button onClick={() => setCurrentTestimonial((prev) => prev === testimonials.length - 1 ? 0 : prev + 1)} className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors">

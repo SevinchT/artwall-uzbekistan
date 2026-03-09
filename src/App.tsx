@@ -14,6 +14,7 @@ import JoinArtist from "./pages/JoinArtist";
 import Liked from "./pages/Liked";
 import TryOnWall from "./pages/TryOnWall";
 import NotFound from "./pages/NotFound";
+import ArtWallChatbot from "./components/chat/ArtWallChatbot";
 
 const queryClient = new QueryClient();
 

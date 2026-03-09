@@ -20,10 +20,10 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isHome
           ? "bg-transparent"
-          : "bg-card/95 backdrop-blur-md border-b border-border/50"
+          : "bg-background/95 backdrop-blur-md border-b border-border/50"
       )}
     >
       <div className="container mx-auto px-4 lg:px-8">
@@ -33,7 +33,7 @@ export function Navbar() {
             to="/"
             className={cn(
               "font-heading text-2xl font-bold tracking-tight transition-colors",
-              isHome ? "text-card" : "text-foreground"
+              isHome ? "text-white" : "text-foreground"
             )}
           >
             Art<span className="text-primary">Wall</span>
@@ -46,12 +46,12 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-sm font-body font-medium tracking-wide transition-colors hover:text-primary",
                   location.pathname === link.href
                     ? "text-primary"
                     : isHome
-                    ? "text-card/80"
-                    : "text-foreground/70"
+                    ? "text-white/70"
+                    : "text-foreground/60"
                 )}
               >
                 {link.label}
@@ -66,7 +66,7 @@ export function Navbar() {
               size="icon"
               className={cn(
                 "hidden sm:flex",
-                isHome ? "text-card hover:bg-card/10" : "text-foreground"
+                isHome ? "text-white/70 hover:bg-white/10" : "text-foreground/60"
               )}
             >
               <Search className="h-5 w-5" />
@@ -76,7 +76,7 @@ export function Navbar() {
               size="icon"
               className={cn(
                 "hidden sm:flex",
-                isHome ? "text-card hover:bg-card/10" : "text-foreground"
+                isHome ? "text-white/70 hover:bg-white/10" : "text-foreground/60"
               )}
             >
               <Heart className="h-5 w-5" />
@@ -85,7 +85,7 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               className={cn(
-                isHome ? "text-card hover:bg-card/10" : "text-foreground"
+                isHome ? "text-white/70 hover:bg-white/10" : "text-foreground/60"
               )}
             >
               <ShoppingBag className="h-5 w-5" />
@@ -95,7 +95,7 @@ export function Navbar() {
               size="sm"
               className={cn(
                 "hidden sm:flex ml-2",
-                isHome && "border-card/60 text-card hover:bg-card/10"
+                isHome && "border-white/40 text-white hover:bg-white/10"
               )}
             >
               <User className="h-4 w-4 mr-2" />
@@ -110,7 +110,7 @@ export function Navbar() {
                   size="icon"
                   className={cn(
                     "md:hidden",
-                    isHome ? "text-card hover:bg-card/10" : "text-foreground"
+                    isHome ? "text-white/70 hover:bg-white/10" : "text-foreground/60"
                   )}
                 >
                   <Menu className="h-5 w-5" />

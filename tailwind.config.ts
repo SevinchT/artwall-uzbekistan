@@ -15,7 +15,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Poppins', 'system-ui', 'sans-serif'],
+        heading: ['Playfair Display', 'Georgia', 'serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -93,7 +94,7 @@ export default {
           to: { opacity: "1" },
         },
         "slide-up": {
-          from: { opacity: "0", transform: "translateY(20px)" },
+          from: { opacity: "0", transform: "translateY(30px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "slide-down": {
@@ -113,16 +114,16 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.6s ease-out forwards",
-        "slide-up": "slide-up 0.6s ease-out forwards",
+        "slide-up": "slide-up 0.8s cubic-bezier(0.22,1,0.36,1) forwards",
         "slide-down": "slide-down 0.6s ease-out forwards",
         "scale-in": "scale-in 0.4s ease-out forwards",
         "float": "float 6s ease-in-out infinite",
       },
       boxShadow: {
-        'soft': '0 4px 20px -4px hsl(0 0% 0% / 0.08)',
-        'card': '0 8px 30px -8px hsl(0 0% 0% / 0.1)',
-        'elevated': '0 20px 50px -15px hsl(0 0% 0% / 0.15)',
-        'gold': '0 8px 30px -8px hsl(36, 49%, 62%, 0.3)',
+        'soft': '0 2px 16px -2px hsl(240 4% 12% / 0.06)',
+        'card': '0 4px 24px -4px hsl(240 4% 12% / 0.08)',
+        'elevated': '0 16px 48px -12px hsl(240 4% 12% / 0.12)',
+        'gold': '0 6px 24px -6px hsl(44, 52%, 54%, 0.25)',
       },
     },
   },

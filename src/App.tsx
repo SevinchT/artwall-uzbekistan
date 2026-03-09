@@ -11,6 +11,7 @@ import Artists from "./pages/Artists";
 import About from "./pages/About";
 import JoinArtist from "./pages/JoinArtist";
 import Liked from "./pages/Liked";
+import TryOnWall from "./pages/TryOnWall";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();

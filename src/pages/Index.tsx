@@ -8,11 +8,13 @@ import { ArtistCard } from "@/components/artist/ArtistCard";
 import { artworks, artists, categories } from "@/data/mockData";
 import heroBg from "@/assets/hero-bg.jpg";
 import { useState } from "react";
+import { useTranslation } from "@/stores/i18nStore";
 
 const Index = () => {
   const featuredArtworks = artworks.slice(0, 8);
   const featuredArtists = artists.slice(0, 4);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const { t } = useTranslation();
 
   const testimonials = [
     {
@@ -35,77 +37,39 @@ const Index = () => {
     },
   ];
 
-  const howItWorks = [
-    {
-      icon: Palette,
-      title: "Discover Art",
-      description: "Browse our curated collection of authentic Uzbek artworks from verified local artists.",
-    },
-    {
-      icon: Eye,
-      title: "Visualize on Your Wall",
-      description: "Use our AR feature to see how the artwork looks in your space before you buy.",
-    },
-    {
-      icon: ShoppingBag,
-      title: "Own & Enjoy",
-      description: "Secure checkout with worldwide shipping. Your artwork arrives safely at your doorstep.",
-    },
+  const howItWorksData = [
+    { icon: Palette, titleKey: "howItWorks.step1.title", descKey: "howItWorks.step1.desc" },
+    { icon: Eye, titleKey: "howItWorks.step2.title", descKey: "howItWorks.step2.desc" },
+    { icon: ShoppingBag, titleKey: "howItWorks.step3.title", descKey: "howItWorks.step3.desc" },
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section — Premium Gallery */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background */}
         <div className="absolute inset-0">
-          <img
-            src={heroBg}
-            alt="Premium art gallery"
-            className="w-full h-full object-cover"
-          />
+          <img src={heroBg} alt="Premium art gallery" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-foreground/75 via-foreground/55 to-foreground/85" />
         </div>
 
-        {/* Content */}
         <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-40 flex flex-col items-center text-center">
-          {/* Overline */}
-          <p
-            className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-8 animate-slide-up"
-            style={{ animationDelay: "0s" }}
-          >
-            AR-Powered Art Marketplace
+          <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-8 animate-slide-up" style={{ animationDelay: "0s" }}>
+            {t("hero.overline")}
           </p>
-
-          {/* Headline */}
-          <h1
-            className="font-heading text-4xl md:text-6xl lg:text-[5.5rem] font-bold leading-[1.08] text-white max-w-5xl animate-slide-up"
-            style={{ animationDelay: "0.1s" }}
-          >
-            Discover Uzbek Art.
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-[5.5rem] font-bold leading-[1.08] text-white max-w-5xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
+            {t("hero.title1")}
             <br />
-            <span className="text-primary italic">See It On Your Wall.</span>
+            <span className="text-primary italic">{t("hero.title2")}</span>
           </h1>
-
-          {/* Subheadline */}
-          <p
-            className="text-white/60 font-body text-lg md:text-xl mt-8 max-w-2xl leading-relaxed animate-slide-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            The first AR-powered marketplace connecting Uzbek artists
-            with global art lovers.
+          <p className="text-white/60 font-body text-lg md:text-xl mt-8 max-w-2xl leading-relaxed animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            {t("hero.subtitle")}
           </p>
-
-          {/* CTA */}
-          <div
-            className="mt-12 animate-slide-up"
-            style={{ animationDelay: "0.3s" }}
-          >
+          <div className="mt-12 animate-slide-up" style={{ animationDelay: "0.3s" }}>
             <Button variant="gold" size="xl" asChild className="text-base">
               <Link to="/gallery">
-                Explore Gallery
+                {t("hero.cta")}
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Link>
             </Button>
@@ -117,17 +81,13 @@ const Index = () => {
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid grid-cols-3 divide-x divide-white/10">
               {[
-                { value: "200+", label: "Waitlisted Buyers" },
-                { value: "50+", label: "Artists" },
-                { value: "🇺🇿", label: "Made in Uzbekistan" },
+                { vKey: "hero.stat1.value", lKey: "hero.stat1.label" },
+                { vKey: "hero.stat2.value", lKey: "hero.stat2.label" },
+                { vKey: "hero.stat3.value", lKey: "hero.stat3.label" },
               ].map((stat) => (
-                <div key={stat.label} className="py-6 md:py-8 text-center">
-                  <p className="font-heading text-2xl md:text-3xl font-bold text-primary">
-                    {stat.value}
-                  </p>
-                  <p className="text-white/50 text-xs md:text-sm mt-1 font-body tracking-wide">
-                    {stat.label}
-                  </p>
+                <div key={stat.lKey} className="py-6 md:py-8 text-center">
+                  <p className="font-heading text-2xl md:text-3xl font-bold text-primary">{t(stat.vKey)}</p>
+                  <p className="text-white/50 text-xs md:text-sm mt-1 font-body tracking-wide">{t(stat.lKey)}</p>
                 </div>
               ))}
             </div>
@@ -140,24 +100,14 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
             <div>
-              <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">
-                Curated Selection
-              </p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
-                Featured Artworks
-              </h2>
-              <p className="text-muted-foreground mt-3 max-w-lg font-body">
-                Handpicked masterpieces from our most talented artists
-              </p>
+              <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">{t("featured.overline")}</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">{t("featured.title")}</h2>
+              <p className="text-muted-foreground mt-3 max-w-lg font-body">{t("featured.desc")}</p>
             </div>
             <Button variant="outline" className="mt-4 md:mt-0" asChild>
-              <Link to="/gallery">
-                View All
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
+              <Link to="/gallery">{t("featured.viewAll")}<ArrowRight className="h-4 w-4 ml-2" /></Link>
             </Button>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredArtworks.map((artwork) => (
               <ArtworkCard key={artwork.id} artwork={artwork} />
@@ -170,35 +120,21 @@ const Index = () => {
       <section className="py-24 lg:py-36 bg-card">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-20">
-            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">
-              Simple Process
-            </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
-              How It Works
-            </h2>
-            <p className="text-muted-foreground mt-3 max-w-lg mx-auto font-body">
-              From discovery to delivery, we make art buying effortless
-            </p>
+            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">{t("howItWorks.overline")}</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">{t("howItWorks.title")}</h2>
+            <p className="text-muted-foreground mt-3 max-w-lg mx-auto font-body">{t("howItWorks.desc")}</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-16">
-            {howItWorks.map((step, index) => (
-              <div
-                key={step.title}
-                className="relative text-center"
-              >
+            {howItWorksData.map((step, index) => (
+              <div key={step.titleKey} className="relative text-center">
                 <div className="text-primary/20 font-heading text-[5rem] font-bold leading-none mb-4">
                   {String(index + 1).padStart(2, "0")}
                 </div>
                 <div className="w-14 h-14 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
                   <step.icon className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed font-body max-w-xs mx-auto">
-                  {step.description}
-                </p>
+                <h3 className="font-heading text-xl font-semibold text-foreground mb-3">{t(step.titleKey)}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed font-body max-w-xs mx-auto">{t(step.descKey)}</p>
               </div>
             ))}
           </div>
@@ -209,14 +145,9 @@ const Index = () => {
       <section className="py-24 lg:py-36">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-14">
-            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">
-              Browse By Style
-            </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
-              Explore Categories
-            </h2>
+            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">{t("categories.overline")}</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">{t("categories.title")}</h2>
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {categories.map((category) => (
               <Link
@@ -226,12 +157,8 @@ const Index = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                  <h3 className="font-heading font-semibold text-white text-lg group-hover:text-primary transition-colors duration-300">
-                    {category.name}
-                  </h3>
-                  <p className="text-white/60 text-sm mt-1 font-body">
-                    {category.count} works
-                  </p>
+                  <h3 className="font-heading font-semibold text-white text-lg group-hover:text-primary transition-colors duration-300">{category.name}</h3>
+                  <p className="text-white/60 text-sm mt-1 font-body">{category.count} {t("categories.works")}</p>
                 </div>
               </Link>
             ))}
@@ -244,24 +171,14 @@ const Index = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-14">
             <div>
-              <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">
-                Our Creators
-              </p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
-                Featured Artists
-              </h2>
-              <p className="text-muted-foreground mt-3 max-w-lg font-body">
-                Meet the creative minds behind our collection
-              </p>
+              <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-3">{t("artists.overline")}</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">{t("artists.title")}</h2>
+              <p className="text-muted-foreground mt-3 max-w-lg font-body">{t("artists.desc")}</p>
             </div>
             <Button variant="outline" className="mt-4 md:mt-0" asChild>
-              <Link to="/artists">
-                View All Artists
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
+              <Link to="/artists">{t("artists.viewAll")}<ArrowRight className="h-4 w-4 ml-2" /></Link>
             </Button>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredArtists.map((artist) => (
               <ArtistCard key={artist.id} artist={artist} />
@@ -274,70 +191,33 @@ const Index = () => {
       <section className="py-24 lg:py-36 bg-foreground">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-6">
-              Testimonials
-            </p>
-
+            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-6">{t("testimonials.overline")}</p>
             <div className="relative">
               <div className="flex items-center justify-center gap-1 mb-10">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
-
               <blockquote className="text-white/90 text-xl md:text-2xl font-heading italic leading-relaxed mb-10">
                 "{testimonials[currentTestimonial].quote}"
               </blockquote>
-
               <div className="flex items-center justify-center gap-4">
-                <img
-                  src={testimonials[currentTestimonial].avatar}
-                  alt={testimonials[currentTestimonial].author}
-                  className="w-11 h-11 rounded-full object-cover ring-2 ring-primary/30"
-                />
+                <img src={testimonials[currentTestimonial].avatar} alt={testimonials[currentTestimonial].author} className="w-11 h-11 rounded-full object-cover ring-2 ring-primary/30" />
                 <div className="text-left">
-                  <p className="font-heading font-semibold text-white text-sm">
-                    {testimonials[currentTestimonial].author}
-                  </p>
-                  <p className="text-white/40 text-xs font-body">
-                    {testimonials[currentTestimonial].role}
-                  </p>
+                  <p className="font-heading font-semibold text-white text-sm">{testimonials[currentTestimonial].author}</p>
+                  <p className="text-white/40 text-xs font-body">{testimonials[currentTestimonial].role}</p>
                 </div>
               </div>
-
-              {/* Navigation */}
               <div className="flex items-center justify-center gap-4 mt-12">
-                <button
-                  onClick={() =>
-                    setCurrentTestimonial((prev) =>
-                      prev === 0 ? testimonials.length - 1 : prev - 1
-                    )
-                  }
-                  className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors"
-                >
+                <button onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)} className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors">
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <div className="flex gap-2">
                   {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setCurrentTestimonial(index)}
-                      className={`h-1.5 rounded-full transition-all duration-500 ${
-                        index === currentTestimonial
-                          ? "bg-primary w-8"
-                          : "bg-white/20 w-1.5"
-                      }`}
-                    />
+                    <button key={index} onClick={() => setCurrentTestimonial(index)} className={`h-1.5 rounded-full transition-all duration-500 ${index === currentTestimonial ? "bg-primary w-8" : "bg-white/20 w-1.5"}`} />
                   ))}
                 </div>
-                <button
-                  onClick={() =>
-                    setCurrentTestimonial((prev) =>
-                      prev === testimonials.length - 1 ? 0 : prev + 1
-                    )
-                  }
-                  className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors"
-                >
+                <button onClick={() => setCurrentTestimonial((prev) => prev === testimonials.length - 1 ? 0 : prev + 1)} className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors">
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>
@@ -350,27 +230,17 @@ const Index = () => {
       <section className="py-24 lg:py-36">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-4">
-              Start Your Collection
-            </p>
+            <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-4">{t("cta.overline")}</p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-              Ready to Own a Piece
-              <br />
-              <span className="text-primary italic">of Uzbekistan?</span>
+              {t("cta.title1")}<br /><span className="text-primary italic">{t("cta.title2")}</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-12 font-body">
-              Join thousands of art lovers who have discovered their perfect
-              pieces through ArtWall.
-            </p>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-12 font-body">{t("cta.desc")}</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button variant="gold" size="xl" asChild>
-                <Link to="/gallery">
-                  Explore Gallery
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Link>
+                <Link to="/gallery">{t("cta.gallery")}<ArrowRight className="h-5 w-5 ml-2" /></Link>
               </Button>
               <Button variant="outline" size="xl" asChild>
-                <Link to="/join-artist">Become an Artist</Link>
+                <Link to="/join-artist">{t("cta.artist")}</Link>
               </Button>
             </div>
           </div>

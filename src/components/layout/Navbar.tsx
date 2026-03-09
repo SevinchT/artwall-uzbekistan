@@ -64,9 +64,9 @@ export function Navbar() {
                 key={link.href}
                 to={link.href}
                 className={cn(
-                  "text-sm font-body font-medium tracking-wide transition-colors hover:text-primary",
+                  "relative text-sm font-body font-medium tracking-wide transition-colors hover:text-primary pb-1",
                   location.pathname === link.href
-                    ? "text-primary"
+                    ? "text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
                     : isHome
                     ? "text-white/70"
                     : "text-foreground/60"

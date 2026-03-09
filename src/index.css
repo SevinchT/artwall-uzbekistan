@@ -127,6 +127,10 @@
     font-family: 'Inter', system-ui, sans-serif;
     @apply font-bold tracking-tight;
   }
+
+  * {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 }
 
 @layer utilities {

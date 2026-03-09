@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Artwork, formatPrice } from "@/data/mockData";
 import { useState } from "react";
 import { useFavoritesStore } from "@/stores/favoritesStore";
+import { useTranslation } from "@/stores/i18nStore";
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -15,6 +16,7 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
   const { favoriteIds, toggleFavorite } = useFavoritesStore();
   const isLiked = favoriteIds.includes(artwork.id);
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div
@@ -26,7 +28,6 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Container */}
       <Link to={`/artwork/${artwork.id}`} className="block relative aspect-[4/5] overflow-hidden">
         <img
           src={artwork.images[0]}
@@ -36,8 +37,6 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
             isHovered && "scale-110"
           )}
         />
-        
-        {/* Overlay on hover */}
         <div
           className={cn(
             "absolute inset-0 bg-foreground/40 flex items-center justify-center transition-opacity duration-300",
@@ -46,12 +45,11 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
         >
           <Button variant="gold" size="sm" className="animate-scale-in">
             <Eye className="h-4 w-4 mr-2" />
-            Quick View
+            {t("artworkCard.quickView")}
           </Button>
         </div>
       </Link>
 
-      {/* Like Button */}
       <button
         onClick={() => toggleFavorite(artwork.id)}
         className={cn(
@@ -64,7 +62,6 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
         <Heart className={cn("h-4 w-4", isLiked && "fill-current")} />
       </button>
 
-      {/* Info */}
       <div className="p-5">
         <Link to={`/artwork/${artwork.id}`}>
           <h3 className="font-heading font-semibold text-foreground truncate hover:text-primary transition-colors duration-300">

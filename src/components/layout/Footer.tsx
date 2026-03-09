@@ -9,7 +9,6 @@ export function Footer() {
 
   return (
     <footer className="bg-dark-section text-dark-section-foreground">
-      {/* Newsletter Section */}
       <div className="border-b border-dark-section-foreground/10">
         <div className="container mx-auto px-4 lg:px-8 py-16">
           <div className="max-w-2xl mx-auto text-center">
@@ -34,10 +33,8 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Main Footer */}
       <div className="container mx-auto px-4 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
           <div>
             <Link to="/" className="font-heading text-2xl font-bold">
               Art<span className="text-primary">Wall</span> <span className="text-sm font-body font-normal tracking-[0.15em] opacity-50">O'zbekiston</span>
@@ -54,7 +51,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Explore */}
           <div>
             <h4 className="font-heading font-semibold mb-4">{t("footer.explore")}</h4>
             <ul className="space-y-3">
@@ -73,7 +69,6 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* For Artists */}
           <div>
             <h4 className="font-heading font-semibold mb-4">{t("footer.forArtists")}</h4>
             <ul className="space-y-3">
@@ -87,11 +82,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Support */}
           <div>
             <h4 className="font-heading font-semibold mb-4">{t("footer.support")}</h4>
             <ul className="space-y-3">
-              {["Help Center", "FAQ"].map((item) => (
+              {[t("footer.helpCenter"), t("footer.faq")].map((item) => (
                 <li key={item}>
                   <Link to="#" className="text-dark-section-foreground/50 hover:text-primary transition-colors text-sm font-body">
                     {item}
@@ -102,7 +96,6 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-dark-section-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-dark-section-foreground/40 text-sm font-body">
             {t("footer.copyright")}

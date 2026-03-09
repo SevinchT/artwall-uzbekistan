@@ -8,22 +8,22 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-dark-section text-dark-section-foreground">
       {/* Newsletter Section */}
-      <div className="border-b border-background/10">
+      <div className="border-b border-dark-section-foreground/10">
         <div className="container mx-auto px-4 lg:px-8 py-16">
           <div className="max-w-2xl mx-auto text-center">
             <h3 className="font-heading text-2xl md:text-3xl font-bold mb-4">
               {t("footer.newsletter.title")}
             </h3>
-            <p className="text-background/60 mb-8 font-body">
+            <p className="text-dark-section-foreground/60 mb-8 font-body">
               {t("footer.newsletter.desc")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <Input
                 type="email"
                 placeholder={t("footer.newsletter.placeholder")}
-                className="bg-background/10 border-background/20 text-background placeholder:text-background/40 focus:border-primary"
+                className="bg-dark-section-foreground/10 border-dark-section-foreground/20 text-dark-section-foreground placeholder:text-dark-section-foreground/40 focus:border-primary"
               />
               <Button variant="gold" className="shrink-0">
                 <Send className="h-4 w-4 mr-2" />
@@ -42,12 +42,12 @@ export function Footer() {
             <Link to="/" className="font-heading text-2xl font-bold">
               Art<span className="text-primary">Wall</span> <span className="text-sm font-body font-normal tracking-[0.15em] opacity-50">O'zbekiston</span>
             </Link>
-            <p className="text-background/50 mt-4 text-sm leading-relaxed font-body">
+            <p className="text-dark-section-foreground/50 mt-4 text-sm leading-relaxed font-body">
               {t("footer.brand.desc")}
             </p>
             <div className="flex gap-4 mt-6">
               {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="text-background/50 hover:text-primary transition-colors">
+                <a key={i} href="#" className="text-dark-section-foreground/50 hover:text-primary transition-colors">
                   <Icon className="h-5 w-5" />
                 </a>
               ))}
@@ -65,7 +65,7 @@ export function Footer() {
                 { label: t("nav.tryOnWall"), href: "/try-on-wall" },
               ].map((item) => (
                 <li key={item.label}>
-                  <Link to={item.href} className="text-background/50 hover:text-primary transition-colors text-sm font-body">
+                  <Link to={item.href} className="text-dark-section-foreground/50 hover:text-primary transition-colors text-sm font-body">
                     {item.label}
                   </Link>
                 </li>
@@ -79,7 +79,7 @@ export function Footer() {
             <ul className="space-y-3">
               {[t("nav.joinArtist")].map((item) => (
                 <li key={item}>
-                  <Link to="/join-artist" className="text-background/50 hover:text-primary transition-colors text-sm font-body">
+                  <Link to="/join-artist" className="text-dark-section-foreground/50 hover:text-primary transition-colors text-sm font-body">
                     {item}
                   </Link>
                 </li>
@@ -93,7 +93,7 @@ export function Footer() {
             <ul className="space-y-3">
               {["Help Center", "FAQ"].map((item) => (
                 <li key={item}>
-                  <Link to="#" className="text-background/50 hover:text-primary transition-colors text-sm font-body">
+                  <Link to="#" className="text-dark-section-foreground/50 hover:text-primary transition-colors text-sm font-body">
                     {item}
                   </Link>
                 </li>
@@ -103,15 +103,15 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-background/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-background/40 text-sm font-body">
+        <div className="border-t border-dark-section-foreground/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-dark-section-foreground/40 text-sm font-body">
             {t("footer.copyright")}
           </p>
           <div className="flex gap-6 text-sm font-body">
-            <Link to="#" className="text-background/40 hover:text-background transition-colors">
+            <Link to="#" className="text-dark-section-foreground/40 hover:text-dark-section-foreground transition-colors">
               {t("footer.privacy")}
             </Link>
-            <Link to="#" className="text-background/40 hover:text-background transition-colors">
+            <Link to="#" className="text-dark-section-foreground/40 hover:text-dark-section-foreground transition-colors">
               {t("footer.terms")}
             </Link>
           </div>

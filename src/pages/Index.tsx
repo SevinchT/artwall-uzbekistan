@@ -212,7 +212,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 lg:py-36 bg-foreground">
+      <section className="py-24 lg:py-36 bg-dark-section">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-primary font-body text-xs tracking-[0.25em] uppercase mb-6">{t("testimonials.overline")}</p>
@@ -222,26 +222,26 @@ const Index = () => {
                   <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                 ))}
               </div>
-              <blockquote className="text-white/90 text-xl md:text-2xl font-heading italic leading-relaxed mb-10">
+              <blockquote className="text-dark-section-foreground/90 text-xl md:text-2xl font-heading italic leading-relaxed mb-10">
                 "{testimonials[currentTestimonial].quote}"
               </blockquote>
               <div className="flex items-center justify-center gap-4">
                 <img src={testimonials[currentTestimonial].avatar} alt={testimonials[currentTestimonial].author} className="w-11 h-11 rounded-full object-cover ring-2 ring-primary/30" />
                 <div className="text-left">
-                  <p className="font-heading font-semibold text-white text-sm">{testimonials[currentTestimonial].author}</p>
-                  <p className="text-white/40 text-xs font-body">{testimonials[currentTestimonial].role}</p>
+                  <p className="font-heading font-semibold text-dark-section-foreground text-sm">{testimonials[currentTestimonial].author}</p>
+                  <p className="text-dark-section-foreground/40 text-xs font-body">{testimonials[currentTestimonial].role}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-4 mt-12">
-                <button onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)} className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors">
+                <button onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)} className="p-2 rounded-full border border-dark-section-foreground/15 text-dark-section-foreground/40 hover:text-dark-section-foreground hover:border-dark-section-foreground/30 transition-colors">
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <div className="flex gap-2">
                   {testimonials.map((_, index) => (
-                    <button key={index} onClick={() => setCurrentTestimonial(index)} className={`h-1.5 rounded-full transition-all duration-500 ${index === currentTestimonial ? "bg-primary w-8" : "bg-white/20 w-1.5"}`} />
+                    <button key={index} onClick={() => setCurrentTestimonial(index)} className={`h-1.5 rounded-full transition-all duration-500 ${index === currentTestimonial ? "bg-primary w-8" : "bg-dark-section-foreground/20 w-1.5"}`} />
                   ))}
                 </div>
-                <button onClick={() => setCurrentTestimonial((prev) => prev === testimonials.length - 1 ? 0 : prev + 1)} className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors">
+                <button onClick={() => setCurrentTestimonial((prev) => prev === testimonials.length - 1 ? 0 : prev + 1)} className="p-2 rounded-full border border-dark-section-foreground/15 text-dark-section-foreground/40 hover:text-dark-section-foreground hover:border-dark-section-foreground/30 transition-colors">
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>

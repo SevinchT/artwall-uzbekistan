@@ -95,7 +95,7 @@ export function Navbar() {
               size="sm"
               className={cn(
                 "hidden sm:flex ml-2",
-                isHome && "border-card/60 text-card hover:bg-card/10"
+                isHome && "border-white/40 text-white hover:bg-white/10"
               )}
             >
               <User className="h-4 w-4 mr-2" />

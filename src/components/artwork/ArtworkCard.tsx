@@ -19,8 +19,8 @@ export function ArtworkCard({ artwork, className }: ArtworkCardProps) {
   return (
     <div
       className={cn(
-        "group relative bg-card rounded-xl overflow-hidden shadow-soft transition-all duration-500",
-        "hover:shadow-elevated hover:-translate-y-1",
+        "group relative bg-card rounded-xl overflow-hidden shadow-soft transition-all duration-700 ease-out",
+        "hover:shadow-elevated hover:-translate-y-1.5",
         className
       )}
       onMouseEnter={() => setIsHovered(true)}

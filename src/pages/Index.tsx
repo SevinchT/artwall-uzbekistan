@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Palette, Eye, ShoppingBag, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Palette, Eye, ShoppingBag, Star, ChevronLeft, ChevronRight, Camera, Sparkles } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ArtworkCard } from "@/components/artwork/ArtworkCard";
@@ -48,36 +48,60 @@ const Index = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroBg} alt="Premium art gallery" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-foreground/75 via-foreground/55 to-foreground/85" />
+          <img src={heroBg} alt="Uzbek craft exhibition with ikat textiles, ceramic plates and miniature paintings" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-foreground/85 via-foreground/60 to-foreground/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-transparent to-foreground/20" />
         </div>
 
-        <div className="relative container mx-auto px-4 lg:px-8 pt-20 pb-40 flex flex-col items-center text-center">
-          <p className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-8 animate-slide-up" style={{ animationDelay: "0s" }}>
-            {t("hero.overline")}
-          </p>
-          <h1 className="font-heading text-4xl md:text-6xl lg:text-[5.5rem] font-bold leading-[1.08] text-white max-w-5xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            {t("hero.title1")}
+        <div className="relative container mx-auto px-4 lg:px-8 pb-32 pt-40">
+          {/* AI Badge */}
+          <div className="inline-flex items-center gap-2 bg-foreground/60 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 mb-10 animate-slide-up" style={{ animationDelay: "0s" }}>
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+            <span className="text-white/80 text-xs font-body font-medium tracking-wide">AI-Powered Art Visualization</span>
+          </div>
+
+          {/* Main Headline — left-aligned, sans-serif, heavy */}
+          <h1 className="font-body font-extrabold text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight max-w-3xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
+            <span className="text-white">Visualize. Connect.</span>
             <br />
-            <span className="text-primary italic">{t("hero.title2")}</span>
+            <span className="text-primary">Own Local Art.</span>
           </h1>
-          <p className="text-white/60 font-body text-lg md:text-xl mt-8 max-w-2xl leading-relaxed animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            {t("hero.subtitle")}
+
+          {/* Subheadline */}
+          <p className="text-white/55 font-body text-base md:text-lg mt-8 max-w-md leading-relaxed animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            The first AI & AR-powered marketplace
+            <br className="hidden sm:block" />
+            connecting Uzbek artists with
+            <br className="hidden sm:block" />
+            global art lovers.
           </p>
-          <div className="mt-12 animate-slide-up" style={{ animationDelay: "0.3s" }}>
+
+          {/* Two CTA Buttons */}
+          <div className="flex flex-wrap items-center gap-4 mt-12 animate-slide-up" style={{ animationDelay: "0.3s" }}>
             <Button variant="gold" size="xl" asChild className="text-base">
               <Link to="/gallery">
-                {t("hero.cta")}
+                Explore Gallery
                 <ArrowRight className="h-5 w-5 ml-2" />
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              size="xl"
+              asChild
+              className="border-white/25 text-white bg-foreground/30 backdrop-blur-sm hover:bg-white/10 hover:border-white/40 text-base"
+            >
+              <Link to="/try-on-wall">
+                <Camera className="h-4.5 w-4.5 mr-2" />
+                Try on Your Wall
               </Link>
             </Button>
           </div>
         </div>
 
         {/* Stats Bar */}
-        <div className="absolute bottom-0 left-0 right-0 border-t border-white/10">
+        <div className="absolute bottom-0 left-0 right-0 border-t border-white/10 bg-foreground/30 backdrop-blur-sm">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid grid-cols-3 divide-x divide-white/10">
               {[
@@ -85,9 +109,9 @@ const Index = () => {
                 { vKey: "hero.stat2.value", lKey: "hero.stat2.label" },
                 { vKey: "hero.stat3.value", lKey: "hero.stat3.label" },
               ].map((stat) => (
-                <div key={stat.lKey} className="py-6 md:py-8 text-center">
-                  <p className="font-heading text-2xl md:text-3xl font-bold text-primary">{t(stat.vKey)}</p>
-                  <p className="text-white/50 text-xs md:text-sm mt-1 font-body tracking-wide">{t(stat.lKey)}</p>
+                <div key={stat.lKey} className="py-5 md:py-6 text-center">
+                  <p className="font-body text-xl md:text-2xl font-bold text-primary">{t(stat.vKey)}</p>
+                  <p className="text-white/45 text-[11px] md:text-xs mt-0.5 font-body tracking-wide uppercase">{t(stat.lKey)}</p>
                 </div>
               ))}
             </div>

@@ -233,7 +233,7 @@ const Index = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center gap-4 mt-12">
-                <button onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)} className="p-2 rounded-full border border-white/15 text-white/40 hover:text-white hover:border-white/30 transition-colors">
+                <button onClick={() => setCurrentTestimonial((prev) => prev === 0 ? testimonials.length - 1 : prev - 1)} className="p-2 rounded-full border border-dark-section-foreground/15 text-dark-section-foreground/40 hover:text-dark-section-foreground hover:border-dark-section-foreground/30 transition-colors">
                   <ChevronLeft className="h-4 w-4" />
                 </button>
                 <div className="flex gap-2">

@@ -63,59 +63,52 @@ const Index = () => {
         <div className="absolute inset-0">
           <img
             src={heroBg}
-            alt="Uzbek Art"
+            alt="Traditional Uzbek ceramics and textiles"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-foreground/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-foreground/80" />
         </div>
 
         {/* Content */}
-        <div className="relative container mx-auto px-4 lg:px-8 pt-20">
-          <div className="max-w-3xl">
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-bold text-card leading-tight animate-slide-up">
-              Discover.{" "}
-              <span className="text-primary">Visualize.</span>
-              <br />
-              Own Authentic Uzbek Art.
-            </h1>
-            <p className="text-card/80 text-lg md:text-xl mt-6 max-w-xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              Connect with Uzbekistan's finest artists. Experience art in your
-              space with AR before you buy.
-            </p>
-            <div className="flex flex-wrap gap-4 mt-10 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <Button variant="hero" size="xl" asChild>
-                <Link to="/gallery">
-                  Browse Gallery
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Link>
-              </Button>
-              <Button variant="heroOutline" size="xl" asChild>
-                <Link to="/join-artist">Join as Artist</Link>
-              </Button>
-            </div>
-
-            {/* Stats */}
-            <div className="flex flex-wrap gap-8 mt-16 animate-slide-up" style={{ animationDelay: "0.3s" }}>
-              <div>
-                <p className="font-heading text-3xl font-bold text-primary">500+</p>
-                <p className="text-card/60 text-sm">Artworks</p>
-              </div>
-              <div>
-                <p className="font-heading text-3xl font-bold text-primary">120+</p>
-                <p className="text-card/60 text-sm">Artists</p>
-              </div>
-              <div>
-                <p className="font-heading text-3xl font-bold text-primary">50+</p>
-                <p className="text-card/60 text-sm">Countries</p>
-              </div>
-            </div>
+        <div className="relative container mx-auto px-4 lg:px-8 pt-20 flex flex-col items-center text-center">
+          <h1 className="font-heading text-4xl md:text-6xl lg:text-8xl font-bold leading-[1.1] animate-slide-up">
+            <span className="text-card">Visualize. Connect.</span>
+            <br />
+            <span className="text-primary">Own Local Art.</span>
+          </h1>
+          <p className="text-card/70 text-lg md:text-xl mt-8 max-w-2xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
+            Discover authentic Uzbek masterpieces — ceramics, textiles, miniatures — and see them on your wall before you buy.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 mt-12 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            <Button variant="hero" size="xl" asChild>
+              <Link to="/gallery">
+                Explore Gallery
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Link>
+            </Button>
+            <Button variant="heroOutline" size="xl" asChild>
+              <Link to="/try-on-wall">Try on Your Wall</Link>
+            </Button>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float">
-          <div className="w-6 h-10 rounded-full border-2 border-card/40 flex items-start justify-center p-2">
-            <div className="w-1 h-2 bg-card/60 rounded-full animate-bounce" />
+        {/* Stats Bar */}
+        <div className="absolute bottom-0 left-0 right-0 bg-foreground/60 backdrop-blur-md border-t border-card/10">
+          <div className="container mx-auto px-4 lg:px-8 py-6">
+            <div className="flex flex-wrap justify-center gap-12 md:gap-20">
+              <div className="text-center">
+                <p className="font-heading text-3xl md:text-4xl font-bold text-primary">500+</p>
+                <p className="text-card/60 text-sm mt-1">Artworks</p>
+              </div>
+              <div className="text-center">
+                <p className="font-heading text-3xl md:text-4xl font-bold text-primary">120+</p>
+                <p className="text-card/60 text-sm mt-1">Artists</p>
+              </div>
+              <div className="text-center">
+                <p className="font-heading text-3xl md:text-4xl font-bold text-primary">1000+</p>
+                <p className="text-card/60 text-sm mt-1">Happy Collectors</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -142,10 +135,7 @@ const Index = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredArtworks.map((artwork) => (
-              <ArtworkCard
-                key={artwork.id}
-                artwork={artwork}
-              />
+              <ArtworkCard key={artwork.id} artwork={artwork} />
             ))}
           </div>
         </div>

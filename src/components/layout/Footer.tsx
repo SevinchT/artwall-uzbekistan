@@ -42,7 +42,7 @@ export function Footer() {
             <Link to="/" className="font-heading text-2xl font-bold">
               Art<span className="text-primary">Wall</span> <span className="text-sm font-body font-normal tracking-[0.15em] opacity-50">O'zbekiston</span>
             </Link>
-            <p className="text-background/50 mt-4 text-sm leading-relaxed font-body">
+            <p className="text-dark-section-foreground/50 mt-4 text-sm leading-relaxed font-body">
               {t("footer.brand.desc")}
             </p>
             <div className="flex gap-4 mt-6">

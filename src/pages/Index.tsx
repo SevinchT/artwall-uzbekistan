@@ -228,8 +228,8 @@ const Index = () => {
               <div className="flex items-center justify-center gap-4">
                 <img src={testimonials[currentTestimonial].avatar} alt={testimonials[currentTestimonial].author} className="w-11 h-11 rounded-full object-cover ring-2 ring-primary/30" />
                 <div className="text-left">
-                  <p className="font-heading font-semibold text-white text-sm">{testimonials[currentTestimonial].author}</p>
-                  <p className="text-white/40 text-xs font-body">{testimonials[currentTestimonial].role}</p>
+                  <p className="font-heading font-semibold text-dark-section-foreground text-sm">{testimonials[currentTestimonial].author}</p>
+                  <p className="text-dark-section-foreground/40 text-xs font-body">{testimonials[currentTestimonial].role}</p>
                 </div>
               </div>
               <div className="flex items-center justify-center gap-4 mt-12">
